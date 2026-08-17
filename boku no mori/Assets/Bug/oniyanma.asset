@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f6a1cf8f28559048aef701a75e14549, type: 3}
-  m_Name: kabutomusi
+  m_Name: oniyanma
   m_EditorClassIdentifier: Assembly-CSharp::BugData
-  id: 0
-  bugName: beetle
+  id: 1
+  bugName: 'oni dragonfly '
   icon: {fileID: 0}
-  catchDifficulty: 5
-  spawnType: 0
+  catchDifficulty: 4
+  spawnType: 2
   spawnRate: 50
-  speed: 9
+  speed: 15
