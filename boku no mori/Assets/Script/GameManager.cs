@@ -10,10 +10,12 @@ public class GameManager : MonoBehaviour
     public List<BugData> spawnableBugs;
     // 現在のスポーンタイプを設定する変数
     public BugSpawnType currentSpawnType;
+    // 選択された虫のデータを格納する変数
+    BugData selectedBug;
     //出現率の合計値を格納する変数
     int totalSpawnRate = 0;
-    //出現する虫のランダム値を格納する変数
-    //int raqndomValue = Random.Range(0,totalSpawnRate);
+    //今まで見てきた虫の出現率を合計した値
+    int currentRate = 0;
 
     void Start()
     {
@@ -27,11 +29,31 @@ public class GameManager : MonoBehaviour
                 Debug.Log(bugs[i].bugName);
             }
         }
+        //出現率の合計値を計算する
         for (int i = 0; i < spawnableBugs.Count; i++)
         {
             totalSpawnRate += spawnableBugs[i].spawnRate;
             Debug.Log(totalSpawnRate);
         }
+
+        //ランダムな値を1回だけ生成する
+        int randomValue = Random.Range(0,totalSpawnRate);
+        Debug.Log(randomValue);
+
+        //虫を抽選する
+        for (int i = 0; i <spawnableBugs.Count; i++)
+        {
+            currentRate += spawnableBugs[i].spawnRate;
+
+            //ランダムな値が現在の出現率より小さい場合、選択された虫のデータを格納する
+            if (randomValue < currentRate)
+            {
+                selectedBug = spawnableBugs[i];
+                Debug.Log(selectedBug.bugName);
+                break;
+            }
+        }
+
     }
 
     // Update is called once per frame
