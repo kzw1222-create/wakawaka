@@ -5,7 +5,6 @@ public class GameManager : MonoBehaviour
 {
     // BugData型の登録する虫のデータを複数入れられるListを作成
     public List<BugData> bugs;
-    
     // BugData型のその場に出てくる虫のデータを複数入れられるListを作成
     public List<BugData> spawnableBugs;
     // 現在のスポーンタイプを設定する変数
@@ -16,9 +15,14 @@ public class GameManager : MonoBehaviour
     int totalSpawnRate = 0;
     //今まで見てきた虫の出現率を合計した値
     int currentRate = 0;
+    // Inventoryスクリプトを格納する変数
+    Inventory inventory;
 
     void Start()
     {
+        //シーン内からInventoryコンポーネントを探して見つかったものをinventoryに入れる
+        inventory = FindFirstObjectByType<Inventory>();
+
         // Listの中身を順番に取り出して表示
         for (int i = 0; i < bugs.Count; i++)
         {
@@ -29,6 +33,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log(bugs[i].bugName);
             }
         }
+
         //出現率の合計値を計算する
         for (int i = 0; i < spawnableBugs.Count; i++)
         {
@@ -53,6 +58,10 @@ public class GameManager : MonoBehaviour
                 break;
             }
         }
+
+        //テストとして、選択された虫のデータをインベントリに追加する
+        inventory.AddBug(selectedBug);
+        inventory.AddBug(selectedBug);
 
     }
 
