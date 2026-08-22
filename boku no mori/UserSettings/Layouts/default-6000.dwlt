@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1917
     height: 980
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Hierarchy
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -192,8 +192,8 @@ MonoBehaviour:
     y: 0
     width: 370
     height: 596
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 226}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -273,8 +273,8 @@ MonoBehaviour:
     y: 0
     width: 475
     height: 924
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 76}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -595,9 +595,9 @@ MonoBehaviour:
       m_LastClickedID:
         m_rawData: 0
       m_ExpandedIDs:
-      - m_rawData: 568105589213745084
       - m_rawData: 568105589213756066
-      - m_rawData: 568105584918839390
+      - m_rawData: 568105584918839406
+      - m_rawData: 568105584918839454
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1443,13 +1443,13 @@ MonoBehaviour:
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs:
-    - m_rawData: 568105584918839842
+    - m_rawData: 568105584918839892
     m_LastClickedID:
-      m_rawData: 568105584918839842
+      m_rawData: 568105584918839892
     m_ExpandedIDs:
-    - m_rawData: 568105589213754558
+    - m_rawData: 568105589213754118
     - m_rawData: 0
-    - m_rawData: 568105584918839522
+    - m_rawData: 568105584918839570
     - m_rawData: 568105587066273791
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1484,7 +1484,7 @@ MonoBehaviour:
       m_rawData: 0
     m_ExpandedIDs:
     - m_rawData: 0
-    - m_rawData: 568105584918839522
+    - m_rawData: 568105584918839570
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1519,8 +1519,8 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: PowerController
-      m_OriginalName: PowerController
+      m_Name: SuccessRange
+      m_OriginalName: SuccessRange
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
@@ -1528,7 +1528,7 @@ MonoBehaviour:
         width: 0
         height: 0
       m_UserData:
-        m_rawData: 568105584918839894
+        m_rawData: 568105584918839944
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -1635,7 +1635,7 @@ MonoBehaviour:
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectEntityId:
     m_rawData: 0
-  m_LastVerticalScrollValue: 0
+  m_LastVerticalScrollValue: 214
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:

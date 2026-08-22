@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class InsectCatcher : MonoBehaviour
 {
@@ -8,15 +9,24 @@ public class InsectCatcher : MonoBehaviour
     public float maxCatchPower = 60f;
     public PowerController powerController;
     RectTransform crosshair;
+    public GameObject successText;
+    public GameObject failureText;
+    private bool gameFinished = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         crosshair = GetComponent<RectTransform>();
+        successText.SetActive(false);
+        failureText.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (gameFinished)
+        {
+            return;
+        }
         if (Input.GetMouseButtonDown(0))
         {
             CheckInsect();
@@ -38,22 +48,39 @@ public class InsectCatcher : MonoBehaviour
 
         Debug.Log("押したときのパワー : " + currentPower);
 
-        if(distance <= CatchRange)
+        //標準が合っていない時
+        if(distance > CatchRange)
         {
-            if(currentPower >= minCatchPower && currentPower <= maxCatchPower)
-            {
-                Debug.Log("虫ゲットだぜ！！！");
-                Destroy(insect);
-            }
-            else
-            {
-                Debug.Log("パワーが適正じゃないぃぃぃいいい！");
-            }
+            CatchFailed();
+            return;
         }
-        else
+        //パワーが合っていない時
+        if(currentPower < minCatchPower || currentPower > maxCatchPower)
         {
-            Debug.Log("虫を捕まえられなかった、、、");
+            CatchFailed();
+            return;
         }
+        //どっちも間違っていない（成功）の時
+        CatchSuccess(insect);
+
+    }
+    void CatchSuccess(GameObject insect)
+    {
+        gameFinished = true;
+
+        Debug.Log("おらぁぁ！！捕まえたぞぉぉぉ！！！");
+        insect.SetActive(false);
+
+        successText.SetActive(true);
+    }
+    void CatchFailed()
+    {
+        gameFinished = true;
+
+        Debug.Log("逃げられたにょーーーーん");
+
+        failureText.SetActive(true);
+
     }
     
 }
