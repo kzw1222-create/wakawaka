@@ -3,6 +3,10 @@ using UnityEngine;
 public class InsectCatcher : MonoBehaviour
 {
     public float CatchRange = 30f;
+
+    public float minCatchPower = 40f;
+    public float maxCatchPower = 60f;
+    public PowerController powerController;
     RectTransform crosshair;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,10 +33,22 @@ public class InsectCatcher : MonoBehaviour
         Vector3 insectScreenPosition = Camera.main.WorldToScreenPoint(insect.transform.position);
 
         float distance = Vector2.Distance(crosshair.position, insectScreenPosition);
+
+        float currentPower = powerController.GetPower();
+
+        Debug.Log("押したときのパワー : " + currentPower);
+
         if(distance <= CatchRange)
         {
-            Debug.Log("虫ゲットだぜ！！！");
-            Destroy(insect);
+            if(currentPower >= minCatchPower && currentPower <= maxCatchPower)
+            {
+                Debug.Log("虫ゲットだぜ！！！");
+                Destroy(insect);
+            }
+            else
+            {
+                Debug.Log("パワーが適正じゃないぃぃぃいいい！");
+            }
         }
         else
         {
