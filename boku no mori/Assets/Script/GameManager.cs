@@ -17,11 +17,16 @@ public class GameManager : MonoBehaviour
     int currentRate = 0;
     // Inventoryスクリプトを格納する変数
     Inventory inventory;
+    // BugCatchManagerスクリプトを格納する変数
+    BugCatchManager bugCatchManager;
 
     void Start()
     {
         //シーン内からInventoryコンポーネントを探して見つかったものをinventoryに入れる
         inventory = FindFirstObjectByType<Inventory>();
+
+        //シーン内からBugCatchManagerコンポーネントを探して見つかったものをbugCatchManagerに入れる
+        bugCatchManager = FindFirstObjectByType<BugCatchManager>();
 
         // Listの中身を順番に取り出して表示
         for (int i = 0; i < bugs.Count; i++)
@@ -59,9 +64,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        //テストとして、選択された虫のデータをインベントリに追加する
-        inventory.AddBug(selectedBug);
-        inventory.AddBug(selectedBug);
+        //テストとして捕獲成功扱いにする
+        bugCatchManager.CatchBug(selectedBug);
 
     }
 
