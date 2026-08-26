@@ -19,9 +19,14 @@ public class GameManager : MonoBehaviour
     Inventory inventory;
     // BugCatchManagerスクリプトを格納する変数
     BugCatchManager bugCatchManager;
+    // ゲームの状態を管理する変数
+    GameState gameState;
 
     void Start()
     {
+        //ゲームの状態を探索モードに設定する
+        gameState = GameState.Exploration;
+
         //シーン内からInventoryコンポーネントを探して見つかったものをinventoryに入れる
         inventory = FindFirstObjectByType<Inventory>();
 
@@ -66,7 +71,32 @@ public class GameManager : MonoBehaviour
 
         //テストとして捕獲成功扱いにする
         bugCatchManager.CatchBug(selectedBug);
+        //テストとしてゲーム状態を捕獲モードに切り替える
+        //ChangeGameState(GameState.Catching);
+    }
 
+    //ゲームの状態を切り替えるメソッド
+    void ChangeGameState(GameState newState)
+    {
+        gameState = newState;
+
+        switch (newState)
+        {
+            case GameState.Exploration:
+            //探索モードの処理
+            Debug.Log("探索モードに切り替えました。");
+            break;
+
+            case GameState.Catching:
+            //捕獲モードの処理
+            Debug.Log("捕獲モードに切り替えました。");
+            break;
+
+            case GameState.Result:
+            //結果表示モードの処理
+            Debug.Log("結果表示モードに切り替えました。");
+            break;
+        }
     }
 
     // Update is called once per frame
