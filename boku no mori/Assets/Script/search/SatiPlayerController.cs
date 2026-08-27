@@ -2,43 +2,54 @@ using UnityEngine;
 
 public class SatiPlayerController : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float rotationSpeed = 10f;
+    Rigidbody rb;
 
-    private Rigidbody rb;
-    private Vector3 moveDirection;
+    Vector3 move;
 
-    private void Awake()
+    float speed = 5f;
+
+    Animator animator;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
-    private void Update()
+    // Update is called once per frame
+    void Update()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+        float x = 0f;
+        float z = 0f;
 
-        moveDirection = new Vector3(horizontal, 0f, vertical).normalized;
-    }
-
-    private void FixedUpdate()
-    {
-        Vector3 movement = moveDirection * moveSpeed * Time.fixedDeltaTime;
-
-        rb.MovePosition(rb.position + movement);
-
-        if (moveDirection.sqrMagnitude > 0.01f)
+        if (Input.GetKey(KeyCode.W))
         {
-            Quaternion targetRotation =
-                Quaternion.LookRotation(moveDirection);
+            z = 1f;
 
-            rb.MoveRotation(
-                Quaternion.Slerp(
-                    rb.rotation,
-                    targetRotation,
-                    rotationSpeed * Time.fixedDeltaTime
-                )
-            );
+            animator.Play("boku_back_Clip");
         }
+        else
+        {
+            animator.Play("boku_back_idle_Clip");
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            z = -1f;
+
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            x = -1f;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            x = 1f;
+        }
+
+        move = new Vector3(x, 0, z);
+
+        rb.linearVelocity = new Vector3(move.x * speed, rb.linearVelocity.y, move.z * speed);
+
+
     }
 }
