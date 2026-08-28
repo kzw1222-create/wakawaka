@@ -4,20 +4,26 @@ using TMPro;
 
 public class SatiInteractDetector : MonoBehaviour
 {
-    [SerializeField] private float interactDistance = 2.5f;
+    [Header("Interact Settings")]
+    [SerializeField] private float interactDistance = 1f;
     [SerializeField] private LayerMask interactableLayer;
+
+    [Header("UI")]
     [SerializeField] private TMP_Text interactText;
 
     private SatiIInteractable currentInteractable;
 
     private void Start()
     {
-        interactText.gameObject.SetActive(false);
+        if (interactText != null)
+        {
+            interactText.gameObject.SetActive(false);
+        }
     }
 
     private void Update()
     {
-        DetectInteractable();
+        DetectInteractable2D();
         UpdateInteractUI();
 
         if (Keyboard.current != null &&
@@ -30,9 +36,9 @@ public class SatiInteractDetector : MonoBehaviour
         }
     }
 
-    private void DetectInteractable()
+    private void DetectInteractable2D()
     {
-        Collider[] hits = Physics.OverlapSphere(
+        Collider2D[] hits = Physics2D.OverlapCircleAll(
             transform.position,
             interactDistance,
             interactableLayer
@@ -41,15 +47,17 @@ public class SatiInteractDetector : MonoBehaviour
         SatiIInteractable closest = null;
         float closestDistance = float.MaxValue;
 
-        foreach (Collider hit in hits)
+        foreach (Collider2D hit in hits)
         {
             SatiIInteractable interactable =
                 hit.GetComponent<SatiIInteractable>();
 
             if (interactable == null)
+            {
                 continue;
+            }
 
-            float distance = Vector3.Distance(
+            float distance = Vector2.Distance(
                 transform.position,
                 hit.transform.position
             );
@@ -66,6 +74,11 @@ public class SatiInteractDetector : MonoBehaviour
 
     private void UpdateInteractUI()
     {
+        if (interactText == null)
+        {
+            return;
+        }
+
         if (currentInteractable != null)
         {
             interactText.gameObject.SetActive(true);

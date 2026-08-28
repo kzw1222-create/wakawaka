@@ -1,55 +1,64 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SatiPlayerController : MonoBehaviour
 {
-    Rigidbody rb;
+    [Header("Movement")]
+    [SerializeField] private float moveSpeed = 5f;
 
-    Vector3 move;
+    private Rigidbody rb;
+    private Vector3 moveDirection;
 
-    float speed = 5f;
-
-    Animator animator;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        float x = 0f;
-        float z = 0f;
-
-        if (Input.GetKey(KeyCode.W))
+        if (Keyboard.current == null)
         {
-            z = 1f;
-
-            animator.Play("boku_back_Clip");
-        }
-        else
-        {
-            animator.Play("boku_back_idle_Clip");
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            z = -1f;
-
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            x = -1f;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            x = 1f;
+            moveDirection = Vector3.zero;
+            return;
         }
 
-        move = new Vector3(x, 0, z);
+        float horizontal = 0f;
+        float vertical = 0f;
 
-        rb.linearVelocity = new Vector3(move.x * speed, rb.linearVelocity.y, move.z * speed);
+        if (Keyboard.current.aKey.isPressed)
+        {
+            horizontal = -1f;
+        }
 
+        if (Keyboard.current.dKey.isPressed)
+        {
+            horizontal = 1f;
+        }
 
+        if (Keyboard.current.sKey.isPressed)
+        {
+            vertical = -1f;
+        }
+
+        if (Keyboard.current.wKey.isPressed)
+        {
+            vertical = 1f;
+        }
+
+        moveDirection = new Vector3(
+            horizontal,
+            0f,
+            vertical
+        ).normalized;
+    }
+
+    private void FixedUpdate()
+    {
+        Vector3 movement =
+            moveDirection *
+            moveSpeed *
+            Time.fixedDeltaTime;
+
+        rb.MovePosition(rb.position + movement);
     }
 }
