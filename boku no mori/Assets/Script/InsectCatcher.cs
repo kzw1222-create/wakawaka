@@ -11,7 +11,7 @@ public class InsectCatcher : MonoBehaviour
     RectTransform crosshair;
     public GameObject successText;
     public GameObject failureText;
-    private bool gameFinished = false;
+    //private bool gameFinished = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,10 +23,10 @@ public class InsectCatcher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameFinished)
-        {
-            return;
-        }
+        //if (gameFinished)
+        //{
+        //    return;
+        //}
         if (Input.GetMouseButtonDown(0))
         {
             CheckInsect();
@@ -66,7 +66,7 @@ public class InsectCatcher : MonoBehaviour
     }
     void CatchSuccess(GameObject insect)
     {
-        gameFinished = true;
+        //gameFinished = true;
 
         Debug.Log("おらぁぁ！！捕まえたぞぉぉぉ！！！");
         insect.SetActive(false);
@@ -75,7 +75,7 @@ public class InsectCatcher : MonoBehaviour
     }
     void CatchFailed()
     {
-        gameFinished = true;
+        //gameFinished = true;
 
         Debug.Log("逃げられたにょーーーーん");
 
